@@ -105,33 +105,51 @@ class MY_Model extends CI_Model
         return $this;
     }
 
-        public function calculateRealOffset($page)
-        {
-            if (is_null($page)|| empty($page)) {
-                $offset = 0;
-            } else{
-                $offset = ($page = $this->perPage)  - $this->perPage;
-            }
-
-            return $offset;
+    public function calculateRealOffset($page)
+    {
+        if (is_null($page) || empty($page)) {
+            $offset = 0;
+        } else {
+            $offset = ($page = $this->perPage)  - $this->perPage;
         }
 
-        public function makePagination($baseUrl, $uriSegment, $totalRows = null)
-        {
-            $this->load->library('pagination');
+        return $offset;
+    }
 
-            $config = [
-                'base_url'          => $baseUrl,
-                'uri_segment'       => $uriSegment,
-                'per_page'          => $this->perPage,
-                ''
-            ]
-        }
+    public function makePagination($baseUrl, $uriSegment, $totalRows = null)
+    {
+        $this->load->library('pagination');
 
-   
+        $config = [
+            'base_url'          => $baseUrl,
+            'uri_segment'       => $uriSegment,
+            'per_page'          => $this->perPage,
+            'total_rows'        => $totalRows,
+            'use_page_number'   => true,
 
+            'full_tag_open'     => '<ul class="pagination">',
+            'full_tag_close'    => '</ul>',
+            'attributes'        => ['class' => 'page-link'],
+            'first_link'        => false,
+            'last_link'         => false,
+            'first_tag_open'    => '<li class="page-item">',
+            'first_tag_close'   => '</li>',
+            'prev_link'         => '&laquo',
+            'prev_tag_open'     => '<li class="page-item">',
+            'prev_tag_close'    => '</li>',
+            'next_link'         => '&raquo',
+            'next_tag_open'     => '<li class="page-item">',
+            'next_tag_close'    => '</li>',
+            'last_tag_open'     => '<li class="page-item">',
+            'last_tag_close'    => '</li>',
+            'cur_tag_open'      => '<li class="page-item active"><a href="#" class="page-link">',
+            'cur_tag_close'     => '<span class="sr-only">(current)</span></a></li>',
+            'num_tag_open'      => '<li class="page-item">',
+            'num_tag_close'     => '</li>',
+        ];
     }
 }
+
 
 
 
