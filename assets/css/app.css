@@ -18,3 +18,8 @@ body {
 	min-height: 75rem;
 	padding-top: 4.5rem;
 }
+
+.card-content {
+	height: 125%;
+	overflow: hidden;
+}

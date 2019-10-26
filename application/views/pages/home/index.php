@@ -2,10 +2,10 @@
 	<?php $this->load->view('layout/_alert.php'); ?>
 	<div class="row">
 		<div class="col-md-9">
-			<div class="card mb-3">
+			<div class="card mb-6">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="card mb-3">
+						<div class="card mb-6">
 							<div class="card-body">
 								Kategori: <strong>Semua Kategori</strong>
 								<span class="float-right">
@@ -18,7 +18,7 @@
 
 				<div class="row">
 					<div class="col-md-6">
-						<div class="card mb-3">
+						<div class="card mb-6 ">
 							<img src="http://placehold.co/100x70" alt="" class="card-img-top">
 							<div class="card-body">
 								<h5 class="card-title">GPS Radio system lora CC1120</h5>
@@ -39,7 +39,7 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="card mb-3">
+						<div class="card mb-6">
 							<img src="http://placehold.co/100x70" alt="" class="card-img-top">
 							<div class="card-body">
 								<h5 class="card-title">FSK modulator </h5>
@@ -59,8 +59,9 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="col-md-6">
-						<div class="card mb-3">
+						<div class="card mb-6">
 							<img src="http://placehold.co/100x70" alt="" class="card-img-top">
 							<div class="card-body">
 								<h5 class="card-title">GPS Ublox G-1922</h5>
@@ -81,7 +82,7 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="card mb-3">
+						<div class="card mb-6">
 							<img src="http://placehold.co/100x70" alt="" class="card-img-top">
 							<div class="card-body">
 								<h5 class="card-title">GPS Radio system lora CC1120</h5>
@@ -108,7 +109,7 @@
 						<li class="page-item"><a class="page-link" href="#">Previous</a></li>
 						<li class="page-item"><a class="page-link" href="#">1</a></li>
 						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">6</a></li>
 						<li class="page-item"><a class="page-link" href="#">Next</a></li>
 					</ul>
 				</nav>
@@ -118,7 +119,7 @@
 		<div class="col-md-3">
 			<div class="row">
 				<div class="col-12">
-					<div class="card mb-3">
+					<div class="card mb-6">
 						<div class="card-header">Pencarian</div>
 						<div class="card-body">
 							<form action="">
@@ -135,7 +136,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="card mb-3">
+					<div class="card mb-6">
 						<div class="card-header">
 							Kategori
 						</div>
