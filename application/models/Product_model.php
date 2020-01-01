@@ -61,7 +61,7 @@ class Product_model extends MY_Model
     public function uploadImage($fieldName, $fileName)
     {
         $config = [
-            'upload_path'           => './image/product',
+            'upload_path'           => './images/product',
             'file_name'             => $fileName,
             'allowed_types'         => 'jpg|gif|png|jpeg|JPG|PNG',
             'max_size'              => 1024,

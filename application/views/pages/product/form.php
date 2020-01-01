@@ -48,7 +48,7 @@
 								<small class="form-text text-danger"><?= $this->session->flashdata('image_error') ?></small>
 							<?php endif ?>
 							<?php if ($input->image): ?>
-								<img src="<?= base_url("/images/product/$input->image") ?>" alt="" height="150">
+								<img src="<?= base_url("/images/product/$input->image") ?>" alt="" width="200" height="150">
 							<?php endif ?>
 						</div>
 						<div class="form-group">

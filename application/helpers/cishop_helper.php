@@ -8,6 +8,7 @@ function getDropdownList($table, $coloumns)
     if ($query->num_rows() >= 1) {
         $option1    = ['' => '-select-'];
         $option2    = array_column($query->result_array(), $coloumns[1], $coloumns[0]);
+        $options    = $option1 + $option2;
 
         return $options;
     }

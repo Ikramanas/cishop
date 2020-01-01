@@ -33,4 +33,4 @@
     <!-- end content -->
     <script src="<?= base_url(); ?>assets/libs/jquery/jquery-3.4.1.min.js"></script>
     <script src="<?= base_url(); ?>assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/assetsjs/app.js"></script>
+    <script src="<?= base_url(); ?>assets/js/app.js"></script>

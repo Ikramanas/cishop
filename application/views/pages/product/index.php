@@ -41,7 +41,7 @@
 								<td><?= $no ?></td>
 								<td>
 									<p>
-										<img src="<?= $row->image ? base_url("images/product/$row->image") : base_url("images/product/default.png") ?>" alt="" height="50">
+										<img src="<?= $row->image ? base_url("images/product/$row->image") : base_url("images/product/default.png") ?>" alt="" height="60">
 										<?= $row->product_title ?>
 									</p>
 								</td>

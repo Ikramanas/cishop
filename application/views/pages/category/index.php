@@ -5,16 +5,16 @@
             <div class="card">
                 <div class="card-header">
                     <span>Pengguna</span>
-                    <a href="admin-kategori-form.html" class="btn btn-secondary btn-sm">Tambah</a>
+                    <a href="<?=base_url('category/create')?>" class="btn btn-secondary btn-sm">Tambah</a>
                     <div class="float-right">
-                        <form action="#">
+                    <form action="<?= base_url("category/search") ?>" method="POST">
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-sm text-center" placeholder="Cari">
+                                <input type="text" name="keyword" class="form-control form-control-sm text-center" placeholder="Cari" value="<?= $this->session->userdata('keyword') ?>">>
                                 <div class="input-group-append">
                                     <button class="btn btn-secondary btn-sm" type="submit">
                                         <i class="fas fa-search"></i>
                                     </button>
-                                    <a href="" class="btn btn-sm btn-secondary" type="submit">
+                                    <a href="<?=base_url('category/reset')?>" class="btn btn-sm btn-secondary" type="submit">
                                         <i class="fas fa-eraser"></i>
                                     </a>
                                 </div>
@@ -42,14 +42,20 @@
                                     <td><?= $row->title ?></td>
                                     <td><?= $row->slug ?> </td>
                                     <td>
-                                        <form action="#">
-                                            <a href="#">
-                                                <button class="btn btn-sm">
-                                                    <i class="fas fa-edit text-info"></i>
-                                                </button>
-                                            </a>
-                                            <button class="btn btn-sm" type="submit" onclick="return confirm('are u sure?')"><i class="fas fa-trash text-danger"></i></button>
-                                        </form>
+                                        <?= form_open(base_url("category/delete/$row->id"), ['method'=>'POST']);?>
+
+                                        <?=form_hidden('id', $row->id);?>
+                                        
+                                        <a href="<?= base_url("category/edit/$row->id")?>" class="btn btn-sm"> 
+                                            <i class="fas fa-edit text-info"></i>
+                                         </a>
+
+                                        <button class="btn btn-sm" type="submit" onclick="return confirm('are u sure?')">
+                                            <i class="fas fa-trash text-danger"></i>
+                                        </button>
+                                        <?= 
+                                        form_close();
+                                        ?>
                                     </td>
                                 </tr>
                             <?php endforeach ?>
