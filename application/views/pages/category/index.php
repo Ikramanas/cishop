@@ -53,9 +53,8 @@
                                         <button class="btn btn-sm" type="submit" onclick="return confirm('are u sure?')">
                                             <i class="fas fa-trash text-danger"></i>
                                         </button>
-                                        <?= 
-                                        form_close();
-                                        ?>
+
+                                        <?=form_close();?>
                                     </td>
                                 </tr>
                             <?php endforeach ?>

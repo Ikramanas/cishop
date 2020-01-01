@@ -81,15 +81,14 @@ class Product_model extends MY_Model
         }
     }
 
-    public function edit($id)
+    public function deleteImage($fileName)
     {
-        $data['content'] = $this->product->where('id', $id)->first();
-
-        if (!$data['content']) {
-            $this->session->set_flashdata('warning', 'Maaf data tidak dapat ditemukan');
-            
+        if (file_exists("./images/product/$fileName")) {
+            unlink("./images/product/$fileName");
         }
     }
+
+    
 }
 
 /* End of file Product_model.php */
