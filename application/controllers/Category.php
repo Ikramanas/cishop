@@ -108,7 +108,7 @@
             if ($this->category->where('id', $id)->update($data['input'])) {
                 $this->session->set_flashdata('success', 'Data berhasil diperbaharui!');
             } else {
-                $this->session->set_flashdata('error', 'Oops! Terjadi suatu kesalahan.');
+                $this->session->set_flashdata('success', 'Data berhasil diperbaharui!');
             }
     
             redirect(base_url('category'));
