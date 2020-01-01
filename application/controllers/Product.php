@@ -11,8 +11,9 @@ class Product extends MY_Controller
         $data['title']      = 'Admin: Produk';
         $data['content']    = $this->product->select(
             [
-                'product.id', 'product.title AS product_title', 'product.image', 'product.price', 'product.is_available',
-                'category.title AS category_title'
+                'product.id','product.id_category','product.title AS product_title', 'product.image', 'product.price', 'product.is_available',
+                'category.id','category.title AS category_title',
+                
             ]
         )
             ->join('category')
@@ -20,7 +21,7 @@ class Product extends MY_Controller
             ->get();
 
         $data['total_rows']     = $this->product->count();
-        $data['pagination']     = $this->product->makePagination(base_url('product'), 3, $data['total_rows']);
+        $data['pagination']     = $this->product->makePagination(base_url('product/index'), 3, $data['total_rows']);
                                     //base url harus menggunakan product/index
         $data['page']           = 'pages/product/index';
         $this->view($data);
