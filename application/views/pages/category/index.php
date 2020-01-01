@@ -56,9 +56,7 @@
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example">
-                        <?= $pagination;
-                        var_dump($pagination);
-                        ?>
+                        <?= $pagination;?>
                     </nav>
                 </div>
             </div>

@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class MY_Model extends CI_Model
 {
     protected $table    = '';
-    protected $perPage  = 5;
+    protected $perPage  = 50;
 
     public function __construct()
     {
@@ -29,25 +29,25 @@ class MY_Model extends CI_Model
         return $this->form_validation->run();
     }
 
-    public function select($coloumns)
+    public function select($columns)
     {
-        $this->db->select(coloumns);
+        $this->db->select($columns);
         return $this;
     }
 
-    public function where($coloumns, $condition)
+    public function where($column, $condition)
     {
-        $this->db->where($coloumns, $condition);
+        $this->db->where($column, $condition);
         return $this;
     }
-    public function like($coloumns, $condition)
+    public function like($column, $condition)
     {
-        $this->db->like($coloumns, $condition);
+        $this->db->like($column, $condition);
         return $this;
     }
-    public function orLike($coloumns, $condition)
+    public function orLike($column, $condition)
     {
-        $this->db->or_like($coloumns, $condition);
+        $this->db->or_like($column, $condition);
         return $this;
     }
 
@@ -57,9 +57,9 @@ class MY_Model extends CI_Model
         return $this;
     }
 
-    public function order_by($coloumn, $order = 'asc')
+    public function order_by($column, $order = 'asc')
     {
-        $this->db->order_by($coloumn, $order);
+        $this->db->order_by($column, $order);
     }
 
     public function first()
@@ -126,7 +126,7 @@ class MY_Model extends CI_Model
             'uri_segment'       => $uriSegment,
             'perPage'           => $this->perPage,
             'total_rows'        => $totalRows,
-            'use_page_number'   => true,
+            'use_page_numbers'   => true,
 
             'full_tag_open'     => '<ul class="pagination">',
             'full_tag_close'    => '</ul>',
@@ -135,10 +135,10 @@ class MY_Model extends CI_Model
             'last_link'         => false,
             'first_tag_open'    => '<li class="page-item">',
             'first_tag_close'   => '</li>',
-            'prev_link'         => '$laquo',
+            'prev_link'         => '&laquo',
             'prev_tag_open'     => '<li class="page-item">',
             'prev_tag_close'    => '</li>',
-            'next_link'         => '$raquo',
+            'next_link'         => '&raquo',
             'next_tag_open'     => '<li class="page-item">',
             'next_tag_close'    => '</li>',
             'last_tag_open'     => '<li class="page-item">',
