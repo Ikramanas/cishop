@@ -120,10 +120,8 @@ class Product extends MY_Controller
 		}
         
         
-        
-        
-        if (!empty($_FILES) && $_FILES['image']['name'] !== '') {
-            $imageName  = url_title($data ['input']->title, '-', true) . '-' . date('YmdHis');
+        if (!empty($_FILES) && $_FILES['image']['name'] !== '') {               //jika file tidak kosong dan file image dam nama tidak kosong
+            $imageName  = url_title($data ['input']->title, '-', true) . '-' . date('YmdHis');    //menambahkan waktu di belakang nama file 
             $upload     = $this->product->uploadImage('image', $imageName);
             if ($upload) {
                 if ($data['content']->image !== '') {
@@ -145,7 +143,7 @@ class Product extends MY_Controller
                 return;
             }
         
-            if ($this->product->where('id', $id)->update($data['input'])) {
+            if (!$this->product->where('id', $id)->update($data['input'])) {
                 $this->session->set_flashdata('success', 'Data berhasil disimpan!');
             } else {
                 $this->session->set_flashdata('error', 'Oops! Terjadi suatu kesalahan');
