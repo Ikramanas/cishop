@@ -44,9 +44,9 @@
                                     <td>
                                         <?= form_open(base_url("category/delete/$row->id"), ['method'=>'POST']);?>
 
-                                        <?=form_hidden('id', $row->id);?>
+                                        <?= form_hidden('id', $row->id);?>
                                         
-                                        <a href="<?= base_url("category/edit/$row->id")?>" class="btn btn-sm"> 
+                                        <a href="<?= base_url("category/edit/$row->id"); ?>" class="btn btn-sm"> 
                                             <i class="fas fa-edit text-info"></i>
                                          </a>
 
@@ -55,6 +55,7 @@
                                         </button>
 
                                         <?=form_close();?>
+                                        
                                     </td>
                                 </tr>
                             <?php endforeach ?>
