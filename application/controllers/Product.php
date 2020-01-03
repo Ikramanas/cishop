@@ -155,7 +155,30 @@ class Product extends MY_Controller
         
     }
     
-    
+    public function delete($id)
+    {
+        if (!$_POST) {
+             redirect(base_url('product'));
+        }
+
+        $product = $this->product->where('id',$id)->first();
+
+        if (!$product) {
+            $this->session->set_flashdata('error', 'Maaf, data tidak ditemukan');
+            redirect(base_url('product'));
+        }
+
+        if ($this->product->where('id',$id)->delete()) {
+            $this->product->deleteImage($product->image);
+           $this->session->set_flashdata('success', 'Data berhasil di hapus');
+        }else{
+            $this->session->set_flashdata('error', 'Oops, Terjadi Kesalahan');
+        }
+
+        
+        redirect(base_url('product'));
+
+    }
     
     
 
