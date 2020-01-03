@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User_model extends MY_Model {
 
+    protected $perPage = 4;
+
     public function getDefaultValues()
     {
         return [
@@ -86,7 +88,7 @@ class User_model extends MY_Model {
 
 
 
-    
+
 }
 
 /* End of file User_model.php */

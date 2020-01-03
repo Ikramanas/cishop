@@ -10,17 +10,16 @@ class User extends MY_Controller {
         parent::__construct();
         //Do your magic here
     }
-    
 
-    public function index($page=null)
+    public function index($page = null)
     {
         $data['title']      = 'admin: Pengguna';
         $data['content']    = $this->user->paginate($page)->get();
         $data['total_rows'] = $this->user->count();
-        $data['pagination'] = $this->user->makePagination(base_url('user'),2,$data['total_rows']);
+        $data['pagination'] = $this->user->makePagination(base_url('user/index'),3, $data['total_rows']);
         $data['page']       = 'pages/user/index';
 
-        $this->view($data);
+        $this->view($data); 
     }
 
 }
