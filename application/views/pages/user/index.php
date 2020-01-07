@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-header">
                         <span>Pengguna</span>
-                        <a href="admin-users-form.html" class="btn btn-secondary btn-sm">Tambah</a>
+                        <a href="<?= base_url('user/create')?>" class="btn btn-secondary btn-sm">Tambah</a>
                         <div class="float-right">
                             <form action="#">
                                 <div class="input-group">
@@ -49,16 +49,20 @@
                                     <td><?= $row->role ?></td>
                                     <td><?= $row->is_active==1 ?'Aktif' : 'Tidak Aktif' ?></td>
                                     <td>
-                                        <form action="#">
-                                            <a href="#">
+                                        <?= form_open(base_url("user/edit/$row->id"), ['method'=>'POST']);?>
+                                        <?= form_hidden('id',  $row->id); ?>
+                                            <a href="<?= base_url("user/edit/$row->id")?>">
                                                 <button class="btn btn-sm">
                                                     <i class="fas fa-edit text-info"></i>
                                                 </button>
                                             </a>
-                                            <button class="btn btn-sm" type="submit"
-                                                onclick="return confirm('are u sure?')"><i
-                                                    class="fas fa-trash text-danger"></i></button>
-                                        </form>
+                                           
+                                            
+                                                <button class="btn btn-sm" type="submit" onclick="return confirm('are u sure?')">
+                                                    <i class="fas fa-trash text-danger"></i>
+                                                </button>
+                                            
+                                        <?= form_close()?>
                                     </td>
                                 </tr>
                                 <?php endforeach ?>
