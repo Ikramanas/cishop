@@ -16,7 +16,7 @@ class User extends MY_Controller {
         $data['title']      = 'admin: Pengguna';
         $data['content']    = $this->user->paginate($page)->get();
         $data['total_rows'] = $this->user->count();
-        $data['pagination'] = $this->user->makePagination(base_url('user/index'),3, $data['total_rows']);
+        $data['pagination'] = $this->user->makePagination(base_url('user/index'),2, $data['total_rows']);
         $data['page']       = 'pages/user/index';
 
         $this->view($data); 
@@ -29,7 +29,7 @@ class User extends MY_Controller {
         } else {
             $input  = (object) $this->input->post(null, true);
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
+            $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[8]');
             $input->password = hashEncrypt($input->password);
             
         }
@@ -67,61 +67,58 @@ class User extends MY_Controller {
     }
 
 
-    public function edit($id)
-    {
-        $data['content'] = $this->user->where('id', $id)->first();
+   public function edit($id)
+   {
+      $data['content']  = $this->user->where('id', $id)->first();
+        $this->user->getValidationRules($id);
+      if (!$data['content']){
+          $this->session->set_flashdata('warning', 'Maaf data tidak dapat ditemukan');
+          redirect(base_url('user'));   
+    }
 
-        if (!$data['content']) {
-            $this->session->set_flashdata('warning', 'Maaf data tidak dapat ditemukan');
-            
-            redirect(base_url('user'));
+    if (!$_POST) {
+        $data['input']  = $data['content'];
+    } else {
+        $data['input']   = (object) $this->input->post(null, true);
         }
 
-        if (!$_POST) {
-			$data['input']	= $data['content'];
-		} else {
-            $data['input']	= (object) $this->input->post(null, true); 
-            if ($data['input']->password !== '') { 
-                $data['input'] = hashEncrypt($data['input']->password);
-            } else{
-                $data['input']->password = $data['content']->password;
-            }
+        if ($data['input']->password  !==   '') {
+            $data['input']->password = hashEncrypt($data['input']->password);
+        } else {
+            $data['input']->password = $data['content']->password;
+        }
+
+        if (!empty($_FILES) && $_FILES['image']['name'] !== '') {
+			$imageName	= url_title($data['input']->name, '-', true) . '-' . date('YmdHis');
+			$upload		= $this->user->uploadImage('image', $imageName);
+			if ($upload) {
+				if ($data['content']->image !== '') {
+					$this->user->deleteImage($data['content']->image);
+				}
+				$data['input']->image	= $upload['file_name'];
+			} else {
+				redirect(base_url("user/edit/$id"));
+			}
 		}
-        
-        
-        if (!empty($_FILES) && $_FILES['image']['name'] !== '') {               //jika file tidak kosong dan file image dam nama tidak kosong
-            $imageName  = url_title($data ['input']->title, '-', true) . '-' . date('YmdHis');    //menambahkan waktu di belakang nama file 
-            $upload     = $this->user->uploadImage('image', $imageName);
-            if ($upload) {
-                if ($data['content']->image !== '') {
-                    $this->user->deleteImage($data['content']->image);
-                }
-                $data ['input']->image   = $upload['file_name'];
-            } else {
-                redirect(base_url("user/edit/$id"));
-                
-            }
-        }
-            
-            if (!$this->user->validate()) {
-                $data['title']          = 'Ubah Produk';
-                $data['form_action']    = base_url("user/edit/$id");
-                $data['page']           = 'pages/user/form';
-                
-                $this->view($data);
-                return;
-            }
-        
-            if (!$this->user->where('id', $id)->update($data['input'])) {
-                $this->session->set_flashdata('success', 'Data berhasil disimpan!');
-            } else {
-                $this->session->set_flashdata('error', 'Oops! Terjadi suatu kesalahan');
-            }
-            
-            
-            redirect(base_url('user'));
-            
-        
+
+		if (!$this->user->validate()) {
+			$data['title']			= 'Ubah Pengguna';
+			$data['form_action']	= base_url("user/edit/$id");
+			$data['page']			= 'pages/user/form';
+
+			$this->view($data);
+			return;
+		}
+
+
+		if ($this->user->where('id', $id)->update($data['input'])) {
+			$this->session->set_flashdata('success', 'Data berhasil disimpan!');
+		} else {
+			$this->session->set_flashdata('error', 'Oops! Terjadi suatu kesalahan');
+		}
+
+		redirect(base_url('user'));
+	   
     }
 
     public function delete($id)

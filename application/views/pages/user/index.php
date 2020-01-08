@@ -49,12 +49,12 @@
                                     <td><?= $row->role ?></td>
                                     <td><?= $row->is_active==1 ?'Aktif' : 'Tidak Aktif' ?></td>
                                     <td>
-                                        <?= form_open(base_url("user/edit/$row->id"), ['method'=>'POST']);?>
+                                        <?= form_open(base_url("user/delete/$row->id"), ['method'=>'POST']);?>
                                         <?= form_hidden('id',  $row->id); ?>
-                                            <a href="<?= base_url("user/edit/$row->id")?>">
-                                                <button class="btn btn-sm">
+                                            <a href="<?= base_url("user/edit/$row->id")?>"" class="btn btn-sm">
+                                                 
                                                     <i class="fas fa-edit text-info"></i>
-                                                </button>
+                                          
                                             </a>
                                            
                                             

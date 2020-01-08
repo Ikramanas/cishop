@@ -37,6 +37,7 @@ class User_model extends MY_Model {
         return $validationRules;
     }
 
+
     public function uploadImage($fieldName, $fileName)
     {
         $config = [
