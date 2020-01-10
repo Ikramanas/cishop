@@ -24,14 +24,16 @@ class User_model extends MY_Model {
                 'label' => 'Name',
                 'rules' => 'required|trim'
             ],
+            // [
+            //     'field' => 'email',
+            //     'label' => 'Email',
+            //     'rules' => '',
+            // ],
             [
-                'field' => 'email',
-                'label' => 'Email',
-                'rules' => 'required|trim|valid_email|callback_unique_email'
-            ],
                 'field' => 'role',
                 'label' => 'Role',
                 'rules' => 'required|trim'
+            ]
         ];
 
         return $validationRules;

@@ -8,7 +8,11 @@ class User extends MY_Controller {
     public function __construct()
     {
         parent::__construct();
-        //Do your magic here
+        $role = $this->session->userdata('role');
+             if ($role != 'admin') {
+                 redirect(base_url('/'));
+                 return;
+             }
     }
 
     public function index($page = null)
@@ -16,7 +20,7 @@ class User extends MY_Controller {
         $data['title']      = 'admin: Pengguna';
         $data['content']    = $this->user->paginate($page)->get();
         $data['total_rows'] = $this->user->count();
-        $data['pagination'] = $this->user->makePagination(base_url('user/index'),2, $data['total_rows']);
+        $data['pagination'] = $this->user->makePagination(base_url('user'),2, $data['total_rows']);
         $data['page']       = 'pages/user/index';
 
         $this->view($data); 
@@ -31,8 +35,12 @@ class User extends MY_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[8]');
             $input->password = hashEncrypt($input->password);
+            $this->form_validation->set_rules('email', 'email', 'required|trim|valid_email|callback_unique_email');
             
         }
+        
+        
+        
 
         if (!empty($_FILES) && $_FILES['image']['name'] !== '') {
             $imageName  = url_title($input->name, '-', true) . '-' . date('YmdHis');
@@ -66,29 +74,37 @@ class User extends MY_Controller {
 
     }
 
+    public function edit($id)
+	{
+		$data['content'] = $this->user->where('id', $id)->first();
 
-   public function edit($id)
-   {
-      $data['content']  = $this->user->where('id', $id)->first();
-        $this->user->getValidationRules($id);
-      if (!$data['content']){
-          $this->session->set_flashdata('warning', 'Maaf data tidak dapat ditemukan');
-          redirect(base_url('user'));   
-    }
+		if (!$data['content']) {
+			$this->session->set_flashdata('warning', 'Maaf, data tidak dapat ditemukan');
+			redirect(base_url('user'));
+		}
 
-    if (!$_POST) {
-        $data['input']  = $data['content'];
-    } else {
-        $data['input']   = (object) $this->input->post(null, true);
-        }
+		if (!$_POST) {
+			$data['input']	= $data['content'];
+		} else {
+            $data['input']	= (object) $this->input->post(null, true);
+            $this->load->library('form_validation');
+			if ($data['input']->password !== '') {
+                $data['input']->password = hashDecrypt($data['input']->password);
+                
+			} else {
+				$data['input']->password = $data['content']->password;
+            }
+            
 
-        if ($data['input']->password  !==   '') {
-            $data['input']->password = hashEncrypt($data['input']->password);
-        } else {
-            $data['input']->password = $data['content']->password;
-        }
+            if ($data['input']->email != $data['content']->email) {
+                $this->form_validation->set_rules('email', 'email', 'required|trim|valid_email|callback_unique_email');
+            } else {
+                $this->form_validation->set_rules('email', 'email', 'required|trim|valid_email');
+            }
+           
+		}
 
-        if (!empty($_FILES) && $_FILES['image']['name'] !== '') {
+		if (!empty($_FILES) && $_FILES['image']['name'] !== '') {
 			$imageName	= url_title($data['input']->name, '-', true) . '-' . date('YmdHis');
 			$upload		= $this->user->uploadImage('image', $imageName);
 			if ($upload) {
@@ -112,14 +128,14 @@ class User extends MY_Controller {
 
 
 		if ($this->user->where('id', $id)->update($data['input'])) {
+            $this->session->set_flashdata('error', 'Oops! Terjadi suatu kesalahan');
+        } else {
 			$this->session->set_flashdata('success', 'Data berhasil disimpan!');
-		} else {
-			$this->session->set_flashdata('error', 'Oops! Terjadi suatu kesalahan');
 		}
 
 		redirect(base_url('user'));
-	   
-    }
+	}
+    
 
     public function delete($id)
     {

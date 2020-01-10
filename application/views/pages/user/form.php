@@ -16,14 +16,13 @@
 						<div class="form-group">
 							<label for="">E-Mail</label>
 							<?php 
-							
 									echo form_input(['type' => 'email', 'name' => 'email', 'value' => $input->email, 'class' => 'form-control', 'placeholder' => 'Masukkan alamat email aktif', 'required' => true,]);
 							?>
 							<?= form_error('email') ?>
 						</div>
 						<div class="form-group">
 							<label for="">Password</label>
-							<?= form_password('password', '', ['class' => 'form-control', 'placeholder' => 'Masukkan password minimal 8 karakter']) ?>
+							<?= form_password('password','', ['class' => 'form-control', 'placeholder' => 'Masukkan password minimal 8 karakter']) ?>
 							<?= form_error('password') ?>
 						</div>
 						<div class="form-group">

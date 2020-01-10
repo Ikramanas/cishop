@@ -5,7 +5,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Product extends MY_Controller
 {
 
-   
+    
+    public function __construct()
+    {
+        parent::__construct();
+        $role   = $this->session->userdata('role');
+        if ($role != 'admin') {
+            
+            redirect(base_url('/'));
+            return;
+        }
+    }
+    
+
+
     public function index($page = null)
     {
         $data['title']      = 'Admin: Produk';
@@ -21,7 +34,7 @@ class Product extends MY_Controller
             ->get();
 
         $data['total_rows']     = $this->product->count();
-        $data['pagination']     = $this->product->makePagination(base_url('product/index'), 3, $data['total_rows']);
+        $data['pagination']     = $this->product->makePagination(base_url('product'), 2, $data['total_rows']);
                                     //base url harus menggunakan product/index
         $data['page']           = 'pages/product/index';
         $this->view($data);

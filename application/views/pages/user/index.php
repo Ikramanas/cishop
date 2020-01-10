@@ -52,9 +52,7 @@
                                         <?= form_open(base_url("user/delete/$row->id"), ['method'=>'POST']);?>
                                         <?= form_hidden('id',  $row->id); ?>
                                             <a href="<?= base_url("user/edit/$row->id")?>"" class="btn btn-sm">
-                                                 
                                                     <i class="fas fa-edit text-info"></i>
-                                          
                                             </a>
                                            
                                             
